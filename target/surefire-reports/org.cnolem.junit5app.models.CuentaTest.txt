@@ -1,0 +1,52 @@
+-------------------------------------------------------------------------------
+Test set: org.cnolem.junit5app.models.CuentaTest
+-------------------------------------------------------------------------------
+Tests run: 72, Failures: 12, Errors: 0, Skipped: 10, Time elapsed: 6.376 s <<< FAILURE! - in org.cnolem.junit5app.models.CuentaTest
+testDebitoCuentaParametrizadoMethodSource{String}[6]  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.cnolem.junit5app.models.CuentaTest.testDebitoCuentaParametrizadoMethodSource(CuentaTest.java:386)
+
+testDebitoCuentaParametrizadoCsvFileSource2{String, String, String, String}[1]  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Jhon> but was: <Andres>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoCsvFileSource2(CuentaTest.java:375)
+
+testDebitoCuentaParametrizadoCsvFileSource2{String, String, String, String}[3]  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Maria> but was: <maria>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoCsvFileSource2(CuentaTest.java:375)
+
+testDebitoCuentaParametrizadoCsvFileSource2{String, String, String, String}[5]  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Lucas> but was: <Luca>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoCsvFileSource2(CuentaTest.java:375)
+
+testDebitoCuentaParametrizadoCsvFileSource2{String, String, String, String}[6]  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoCsvFileSource2(CuentaTest.java:376)
+
+testDebitoCuentaParametrizadoCsvSource{String, String}[6]  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoCsvSource(CuentaTest.java:343)
+
+testDebitoCuentaParametrizadoValueSource{String}[6]  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoValueSource(CuentaTest.java:334)
+
+testDebitoCuentaParametrizadoCsvSource2{String, String, String, String}[1]  Time elapsed: 0.004 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Jhon> but was: <Andres>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoCsvSource2(CuentaTest.java:355)
+
+testDebitoCuentaParametrizadoCsvSource2{String, String, String, String}[3]  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Maria> but was: <maria>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoCsvSource2(CuentaTest.java:355)
+
+testDebitoCuentaParametrizadoCsvSource2{String, String, String, String}[5]  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Lucas> but was: <Luca>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoCsvSource2(CuentaTest.java:355)
+
+testDebitoCuentaParametrizadoCsvSource2{String, String, String, String}[6]  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoCsvSource2(CuentaTest.java:356)
+
+testDebitoCuentaParametrizadoCsvFileSource{String}[7]  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.cnolem.junit5app.models.CuentaTest$PruebasParametrizadasTest.testDebitoCuentaParametrizadoCsvFileSource(CuentaTest.java:364)
+
