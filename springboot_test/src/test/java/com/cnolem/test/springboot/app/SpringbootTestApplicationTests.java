@@ -1,5 +1,7 @@
 package com.cnolem.test.springboot.app;
 
+import com.cnolem.test.springboot.app.models.Banco;
+import com.cnolem.test.springboot.app.models.Cuenta;
 import com.cnolem.test.springboot.app.repositories.BancoRepository;
 import com.cnolem.test.springboot.app.repositories.CuentaRepository;
 import com.cnolem.test.springboot.app.services.CuentaService;
@@ -46,6 +48,17 @@ class SpringbootTestApplicationTests {
 
 		assertEquals("900", saldoCuentaOrigen.toPlainString());
 		assertEquals("2100", saldoCuentaDestino.toPlainString());
+
+		int total = service.revisarTotalTransferencias(1L);
+
+		assertEquals(1, total);
+
+		verify(cuentaRepository, times(3)).findById(1L);
+		verify(cuentaRepository, times(3)).findById(2L);
+		verify(cuentaRepository, times(2)).update(any(Cuenta.class));
+
+		verify(bancoRepository, times(2)).findById(1L);
+		verify(bancoRepository).update(any(Banco.class));
 	}
 
 }
