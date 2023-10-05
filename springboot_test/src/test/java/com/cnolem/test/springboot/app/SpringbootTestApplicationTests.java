@@ -10,7 +10,11 @@ import com.cnolem.test.springboot.app.services.CuentaServiceImpl;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static com.cnolem.test.springboot.app.Datos.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,16 +23,23 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class SpringbootTestApplicationTests {
 
+	//@Mock
+	@MockBean
 	CuentaRepository cuentaRepository;
+
+	//@Mock
+	@MockBean
 	BancoRepository bancoRepository;
 
-	CuentaService service;
+	//@InjectMocks
+	@Autowired
+	CuentaServiceImpl service;
 
 	@BeforeEach
 	void setUp() {
-		cuentaRepository = mock(CuentaRepository.class);
+		/*cuentaRepository = mock(CuentaRepository.class);
 		bancoRepository = mock(BancoRepository.class);
-		service = new CuentaServiceImpl(cuentaRepository, bancoRepository);
+		service = new CuentaServiceImpl(cuentaRepository, bancoRepository);*/
 		/*Datos.CUENTA_001.setSaldo(new BigDecimal("1000"));
 		Datos.CUENTA_002.setSaldo(new BigDecimal("2000"));
 		Datos.BANCO.setTotalTransferencia(0);*/

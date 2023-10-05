@@ -6,7 +6,9 @@ import com.cnolem.test.springboot.app.repositories.BancoRepository;
 import com.cnolem.test.springboot.app.repositories.CuentaRepository;
 
 import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CuentaServiceImpl implements CuentaService {
 
     private CuentaRepository cuentaRepository;
