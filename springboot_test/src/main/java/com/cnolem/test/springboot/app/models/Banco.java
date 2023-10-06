@@ -1,21 +1,29 @@
 package com.cnolem.test.springboot.app.models;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Entity
+@Table(name = "bancos")
 public class Banco {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
-    private int totalTransferencia;
+
+    @Column(name = "total_transferencias")
+    private int totalTransferencias;
 
     public Banco() {
     }
 
-    public Banco(Long id, String nombre, int totalTransferencia) {
+    public Banco(Long id, String nombre, int totalTransferencias) {
         this.id = id;
         this.nombre = nombre;
-        this.totalTransferencia = totalTransferencia;
+        this.totalTransferencias = totalTransferencias;
     }
 
     public Long getId() {
@@ -34,12 +42,12 @@ public class Banco {
         this.nombre = nombre;
     }
 
-    public int getTotalTransferencia() {
-        return totalTransferencia;
+    public int getTotalTransferencias() {
+        return totalTransferencias;
     }
 
-    public void setTotalTransferencia(int totalTransferencia) {
-        this.totalTransferencia = totalTransferencia;
+    public void setTotalTransferencias(int totalTransferencias) {
+        this.totalTransferencias = totalTransferencias;
     }
 
     @Override
@@ -47,11 +55,11 @@ public class Banco {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Banco banco = (Banco) o;
-        return totalTransferencia == banco.totalTransferencia && id.equals(banco.id) && nombre.equals(banco.nombre);
+        return totalTransferencias == banco.totalTransferencias && id.equals(banco.id) && nombre.equals(banco.nombre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, totalTransferencia);
+        return Objects.hash(id, nombre, totalTransferencias);
     }
 }
