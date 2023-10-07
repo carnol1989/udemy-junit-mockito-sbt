@@ -1,9 +1,10 @@
 package com.cnolem.test.springboot.app.controllers;
 
-import com.cnolem.test.springboot.app.Datos;
+import static com.cnolem.test.springboot.app.Datos.*;
+import com.cnolem.test.springboot.app.models.Cuenta;
 import com.cnolem.test.springboot.app.models.TransaccionDto;
 import com.cnolem.test.springboot.app.services.CuentaService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,9 +16,14 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -40,7 +46,7 @@ class CuentaControllerTest {
     @Test
     void testDetalle() throws Exception {
         //Given
-        when(cuentaService.findById(1L)).thenReturn(Datos.crearCuenta001().orElseThrow());
+        when(cuentaService.findById(1L)).thenReturn(crearCuenta001().orElseThrow());
 
         //Then
         mvc.perform(get("/api/cuentas/1").contentType(MediaType.APPLICATION_JSON))
@@ -60,6 +66,14 @@ class CuentaControllerTest {
         dto.setCuentaDestinoId(2L);
         dto.setMonto(new BigDecimal("100"));
         dto.setBancoId(1L);
+        System.out.println(objectMapper.writeValueAsString(dto));
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("date", LocalDate.now().toString());
+        response.put("status", "ok");
+        response.put("mensaje", "Transferencia realizada con éxito!");
+        response.put("transaccion", dto);
+        System.out.println(objectMapper.writeValueAsString(response));
 
         //When
         mvc.perform(post("/api/cuentas/transferir")
@@ -71,6 +85,49 @@ class CuentaControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.date").value(LocalDate.now().toString()))
                 .andExpect(jsonPath("$.mensaje").value("Transferencia realizada con éxito!"))
-                .andExpect(jsonPath("$.transaccion.cuentaOrigenId").value(dto.getCuentaOrigenId()));
+                .andExpect(jsonPath("$.transaccion.cuentaOrigenId").value(dto.getCuentaOrigenId()))
+                .andExpect(content().json(objectMapper.writeValueAsString(response)));
+    }
+
+    @Test
+    void testListar() throws Exception {
+        //Given
+        List<Cuenta> cuentas = Arrays.asList(crearCuenta001().orElseThrow(),
+                crearCuenta002().orElseThrow());
+        when(cuentaService.findAll()).thenReturn(cuentas);
+
+        //When
+        mvc.perform(get("/api/cuentas").contentType(MediaType.APPLICATION_JSON))
+        //Then
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].persona").value("Andrés"))
+                .andExpect(jsonPath("$[1].persona").value("Jhon"))
+                .andExpect(jsonPath("$[0].saldo").value("1000"))
+                .andExpect(jsonPath("$[1].saldo").value("2000"))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(content().json(objectMapper.writeValueAsString(cuentas)));
+
+        verify(cuentaService).findAll();
+    }
+
+    @Test
+    void testGuardar() throws Exception {
+        Cuenta cuenta = new Cuenta(null, "Pepe", new BigDecimal("3000"));
+        when(cuentaService.save(any())).then(invocation -> {
+            Cuenta c = invocation.getArgument(0);
+            c.setId(3L);
+            return c;
+        });
+
+        mvc.perform(post("/api/cuentas").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(cuenta)))
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id", is(3)))
+                .andExpect(jsonPath("$.persona", is("Pepe")))
+                .andExpect(jsonPath("$.saldo", is(3000)));
+
+        verify(cuentaService).save(any());
     }
 }

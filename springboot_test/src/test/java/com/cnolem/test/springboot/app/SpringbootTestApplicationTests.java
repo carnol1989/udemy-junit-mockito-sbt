@@ -33,7 +33,8 @@ class SpringbootTestApplicationTests {
 
 	//@InjectMocks
 	@Autowired
-	CuentaServiceImpl service;
+//	CuentaServiceImpl service;
+	CuentaService service;
 
 	@BeforeEach
 	void setUp() {

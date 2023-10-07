@@ -6,6 +6,8 @@ import com.cnolem.test.springboot.app.repositories.BancoRepository;
 import com.cnolem.test.springboot.app.repositories.CuentaRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,9 +23,19 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
+    public List<Cuenta> findAll() {
+        return null;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Cuenta findById(Long id) {
         return cuentaRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public Cuenta save(Cuenta cuenta) {
+        return null;
     }
 
     @Override
